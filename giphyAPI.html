@@ -8,18 +8,34 @@
   </head>
 
 <body>
+    <button data-animal="dachsund">dachshund</button>
+    <button data-animal="dog">dog</button>
+    <button data-animal="fox">fox</button>
+    <button data-animal="coyote">coyote</button>
+    <button data-animal="jackal">jackal</button>
+  
+    <div id="Gifshere"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-        var queryURL = "";
+        
+        var animal = $(this).attr('data-animal');
+
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        animal + "&api_key=hVhyMFSUZ642JM6Hzv5ek7FbAhILnWSB&limit=10";
     
         $.ajax({
             url: queryURL,
             method: 'GET'
         }) .then(function(response) {
             console.log(response);
+            var results = response.data;
+
+            for (var i = 0; i < results.length; i++ {
+
+            })
         });
-        
+
     </script>
     
 </body>
