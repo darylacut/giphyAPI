@@ -14,16 +14,50 @@
     <button data-animal="coyote">coyote</button>
     <button data-animal="werewolf">werewolf</button>
 
-    <form id='animalSearch'>
-        <label for='animalInput'>search for an animal</label>
-        <input type='text' id='animalInput'>
-        <input id='searchAnimal' type='submit' value='search animal'>
+    <div id='NewButtonsHere'></div>
+    
+    <br>
+
+    <div id='NewsGifsHere'></div>
+    <div id="GifsHere"></div>
+
+    <form id='AnimalSearch'>
+        <label for='AnimalInput'>add an animal to the list</label>
+        <input type='text' id='AnimalInput'>
+        <input id='SearchAnimal' type='submit' value='search animal'>
     </form>
-  
-    <div id="Gifshere"></div>
+   
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+
+        var animalArray = ["dachshund", "dog", "fox", "coyote", "werewolf"];
+
+        function createButton() {
+            $('#NewButtonsHere').empty();
+
+            for (var i = 0; i < animalArray.length; i++)  {
+                var x = $("<button>");
+                    x.addClass("Animal");
+                    x.attr('data-animal', animalArray[i]);
+                    x.text(animalArray[i]);
+                    $('#NewButtonsHere').append(x);
+            }
+        }
+
+        $('#SearchAnimal').on('click', function(event) {
+            event.preventDefault();
+            var newAnimal = $('#AnimalInput').val().trim();
+            var newButton = $('button', {       
+                                text: newAnimal,
+                                click: function () {
+                                    alert(test);    
+                                }
+                            }
+                     )
+            
+            createButton();
+        }
         
         $('button').on('click', function() {
 
@@ -53,7 +87,7 @@
                         gifDisplay.append(ratingDisplay);
                         gifDisplay.append(animalDisplay);
 
-                        $('#Gifshere').prepend(gifDisplay);
+                        $('#GifsHere').prepend(gifDisplay);
 
                     }
                 })
