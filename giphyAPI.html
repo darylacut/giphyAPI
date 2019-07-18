@@ -12,7 +12,12 @@
     <button data-animal="dog">dog</button>
     <button data-animal="fox">fox</button>
     <button data-animal="coyote">coyote</button>
-    <button data-animal="jackal">jackal</button>
+    <button data-animal="werewolf">werewolf</button>
+
+    <form id='animalSearch'>
+        <label for='animalInput'>search for an animal</label>
+        <input type='text' id='animalInput'>
+    </form>
   
     <div id="Gifshere"></div>
 
@@ -42,7 +47,7 @@
                         var ratingDisplay = $('<p>').text('Rating: ' + rating);
                     
                         var animalDisplay = $('<img>');
-                        animalDisplay.attr('src', results[i].images.fixed_width.url);
+                        animalDisplay.attr('src', results[i].images.original.url);
 
                         gifDisplay.append(ratingDisplay);
                         gifDisplay.append(animalDisplay);
