@@ -8,24 +8,26 @@
   </head>
 
 <body>
-    <button data-animal="dachsund">dachshund</button>
+   <!-- <button data-animal="dachsund">dachshund</button>
     <button data-animal="dog">dog</button>
     <button data-animal="fox">fox</button>
     <button data-animal="coyote">coyote</button>
     <button data-animal="werewolf">werewolf</button>
+    -->
 
     <div id='NewButtonsHere'></div>
     
     <br>
-
-    <div id='NewsGifsHere'></div>
-    <div id="GifsHere"></div>
 
     <form id='AnimalSearch'>
         <label for='AnimalInput'>add an animal to the list</label>
         <input type='text' id='AnimalInput'>
         <input id='SearchAnimal' type='submit' value='search animal'>
     </form>
+
+    <div id='NewsGifsHere'></div>
+    <div id="GifsHere"></div>
+   
    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -48,17 +50,13 @@
         $('#SearchAnimal').on('click', function(event) {
             event.preventDefault();
             var newAnimal = $('#AnimalInput').val().trim();
-            var newButton = $('button', {       
-                                text: newAnimal,
-                                click: function () {
-                                    alert(test);    
-                                }
-                            }
-                     )
+            animalArray.push(newAnimal);
             
             createButton();
-        }
+        });
         
+            createButton();
+
         $('button').on('click', function() {
 
             var animal = $(this).attr('data-animal');
