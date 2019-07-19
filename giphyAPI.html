@@ -8,12 +8,6 @@
   </head>
 
 <body>
-   <!-- <button data-animal="dachsund">dachshund</button>
-    <button data-animal="dog">dog</button>
-    <button data-animal="fox">fox</button>
-    <button data-animal="coyote">coyote</button>
-    <button data-animal="werewolf">werewolf</button>
-    -->
 
     <div id='NewButtonsHere'></div>
     
@@ -22,10 +16,11 @@
     <form id='AnimalSearch'>
         <label for='AnimalInput'>add an animal to the list</label>
         <input type='text' id='AnimalInput'>
-        <input id='SearchAnimal' type='submit' value='search animal'>
+        <input id='btnSearchAnimal' type='submit' value='search animal'>
     </form>
 
-    <div id='NewsGifsHere'></div>
+<!-- gifs appear here -->
+   
     <div id="GifsHere"></div>
    
    
@@ -33,64 +28,59 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
-        var animalArray = ["dachshund", "dog", "fox", "coyote", "werewolf"];
+        var topicsArray = ["dachshund", "dog", "fox", "coyote", "werewolf"];
 
+    // values assigned to the newly created button
         function createButton() {
             $('#NewButtonsHere').empty();
-
-            for (var i = 0; i < animalArray.length; i++)  {
+            for (var i = 0; i < topicsArray.length; i++)  {
                 var x = $("<button>");
-                    x.addClass("Animal");
-                    x.attr('data-animal', animalArray[i]);
-                    x.text(animalArray[i]);
+                    x.addClass("NewAnimalBtn");
+                    x.attr('data-animal', topicsArray[i]);
+                    x.text(topicsArray[i]);
                     $('#NewButtonsHere').append(x);
             }
         }
-
-        $('#SearchAnimal').on('click', function(event) {
+    
+    // gathers value from search input and creates new topic button
+        $('#btnSearchAnimal').on('click', function(event) {
             event.preventDefault();
-            var newAnimal = $('#AnimalInput').val().trim();
-            animalArray.push(newAnimal);
+            var newAnimal = $('#AnimalInput').val();
+            topicsArray.push(newAnimal);
             
             createButton();
         });
         
             createButton();
 
-        $('button').on('click', function() {
-
+    // assigns a function to the newly created button
+        $('.NewAnimalBtn').on('click', function() {
+          
             var animal = $(this).attr('data-animal');
-
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
             animal + "&api_key=hVhyMFSUZ642JM6Hzv5ek7FbAhILnWSB&limit=10";
         
             $.ajax({
                 url: queryURL,
-                method: 'GET'
+                method: "GET"
             }) 
             
                 .then(function(response) {
                     console.log(response);
                     var results = response.data;
-
-                    for (var i = 0; i < results.length; i++) {
+                    for (var i = 0; i < topicsArray.length; i++) {
                         var gifDisplay = $('<div>');
-
                         var rating = results[i].rating;
                         var ratingDisplay = $('<p>').text('Rating: ' + rating);
                     
                         var animalDisplay = $('<img>');
                         animalDisplay.attr('src', results[i].images.original.url);
-
                         gifDisplay.append(ratingDisplay);
                         gifDisplay.append(animalDisplay);
-
                         $('#GifsHere').prepend(gifDisplay);
-
                     }
                 })
         });
-
     </script>
     
 </body>

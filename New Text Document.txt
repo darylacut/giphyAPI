@@ -1,0 +1,5 @@
+global var for searchquery input
+use this for getting value of input and 
+function for the inserted button
+
+ajax
