@@ -32,6 +32,7 @@
 
     // values assigned to the newly created button
         function createButton() {
+            //console.log(topicsArray);
             $('#NewButtonsHere').empty();
             for (var i = 0; i < topicsArray.length; i++)  {
                 var x = $("<button>");
@@ -54,8 +55,8 @@
             createButton();
 
     // assigns a function to the newly created button
-        $('.NewAnimalBtn').on('click', function() {
-          
+        $('#NewButtonsHere').on('click', '.NewAnimalBtn', function() {
+            console.log(this);
             var animal = $(this).attr('data-animal');
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
             animal + "&api_key=hVhyMFSUZ642JM6Hzv5ek7FbAhILnWSB&limit=10";
