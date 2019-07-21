@@ -11,7 +11,9 @@
 <body>
 
     <div id='title'>Welcome to the Virtual Safari!</div>
-    <br>
+
+    <embed src='circleoflife.mp3' autostart='true' loop='true' hidden='true'>
+
     <div id='NewButtonsHere'></div>
     <br>
     <form id='AnimalSearch'>
@@ -21,8 +23,9 @@
         <br>
         <input id='btnSearchAnimal' type='submit' value='add animal' class='NewAnimalBtn'>
     </form>
-
-
+    <br>
+    <div id='Instructions'>click on the picture to see the animal in action!</div>
+    
 <!-- gifs appear here -->
     <div id="GifsHere"></div>
    
@@ -46,6 +49,7 @@
     
     // gathers value from search input and creates new topic button
         $('#btnSearchAnimal').on('click', function(event) {
+        
             event.preventDefault();
             var newAnimal = $('#AnimalInput').val();
             topicsArray.push(newAnimal);
@@ -55,11 +59,17 @@
         
             createButton();
 
-         
-
+        // creates a function that shows instructions
+        function toggleInstructions() {
+            var showInstructions = document.getElementById('Instructions');
+            showInstructions.style.display = 'block';
+        } 
+        
     // assigns a function to the newly created button
         $('#NewButtonsHere').on('click', '.NewAnimalBtn', function() {
             console.log(this);
+
+           toggleInstructions ();
 
             var animal = $(this).attr('data-animal');
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
