@@ -69,16 +69,19 @@
         $('#NewButtonsHere').on('click', '.NewAnimalBtn', function() {
             console.log(this);
 
-           toggleInstructions ();
+           
 
             var animal = $(this).attr('data-animal');
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
             animal + "&api_key=hVhyMFSUZ642JM6Hzv5ek7FbAhILnWSB&limit=10";
         
+            toggleInstructions ();
          
             $.ajax({
                 url: queryURL,
                 method: "GET"
+
+                
             }) 
             
                 .then(function(response) {
