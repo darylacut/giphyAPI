@@ -96,11 +96,8 @@
                         // prepending gif div to the html
                         $('#GifsHere').prepend(gifDisplay);
 
-                    }
 
-                });
-
-                    $('#GifsHere').on('click', '.NewGif', function() {
+                        $('#GifsHere').on('click', '.NewGif', function() {
                         var state = $(this).attr('img-state');   
                         if (state === 'still') {
                                $(this).attr('src', $(this).attr('img-animate'));
@@ -112,6 +109,15 @@
                            
 
                     });
+
+                    }
+
+            
+
+
+                });
+
+                   
         });
 
   
