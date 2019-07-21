@@ -14,8 +14,6 @@
 
     <embed src='circleoflife.mp3' autostart='true' loop='true' hidden='true'>
 
-    <div id='NewButtonsHere'></div>
-    <br>
     <form id='AnimalSearch'>
         <label for='AnimalInput'>which animal would you like to see?</label>
         <br>
@@ -23,6 +21,10 @@
         <br>
         <input id='btnSearchAnimal' type='submit' value='add animal' class='NewAnimalBtn'>
     </form>
+    <br>
+    <br>
+    <div id='NewButtonsHere'></div>
+
     <br>
     <div id='Instructions'>click on the picture to see the animal in action!</div>
     
@@ -86,7 +88,7 @@
             
                 .then(function(response) {
                     console.log(response);
-
+                    
                     var results = response.data;
 
                     for (var i = 0; i < topicsArray.length; i++) {
@@ -98,11 +100,11 @@
                         
                         
                         // displays a still image upon displaying with added attributes and class
-                        animalDisplay.attr('src', results[i].images.original_still.url)
+                        animalDisplay.attr('src', results[i].images.fixed_height_still.url)
                                     .addClass('NewGif')
                                     .attr('img-state', 'still')
-                                    .attr('img-still', results[i].images.original_still.url )
-                                    .attr('img-animate', results[i].images.original.url );
+                                    .attr('img-still', results[i].images.fixed_height_still.url )
+                                    .attr('img-animate', results[i].images.fixed_height.url );
 
 
                         // adding rating and image to the gif div
