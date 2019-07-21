@@ -96,7 +96,7 @@
                         // prepending gif div to the html
                         $('#GifsHere').prepend(gifDisplay);
 
-
+                        // function for animating or pausing gif depending on current state
                         $('#GifsHere').on('click', '.NewGif', function() {
                         var state = $(this).attr('img-state');   
                         if (state === 'still') {
