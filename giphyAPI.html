@@ -19,20 +19,18 @@
         <input id='btnSearchAnimal' type='submit' value='search animal'>
     </form>
 
+
 <!-- gifs appear here -->
-   
     <div id="GifsHere"></div>
-   
    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-
         var topicsArray = ["dachshund", "dog", "fox", "coyote", "werewolf"];
 
     // values assigned to the newly created button
         function createButton() {
-            //console.log(topicsArray);
+            console.log(topicsArray);
             $('#NewButtonsHere').empty();
             for (var i = 0; i < topicsArray.length; i++)  {
                 var x = $("<button>");
@@ -54,13 +52,17 @@
         
             createButton();
 
+         
+
     // assigns a function to the newly created button
         $('#NewButtonsHere').on('click', '.NewAnimalBtn', function() {
             console.log(this);
+
             var animal = $(this).attr('data-animal');
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
             animal + "&api_key=hVhyMFSUZ642JM6Hzv5ek7FbAhILnWSB&limit=10";
         
+         
             $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -68,20 +70,51 @@
             
                 .then(function(response) {
                     console.log(response);
+
                     var results = response.data;
+
                     for (var i = 0; i < topicsArray.length; i++) {
                         var gifDisplay = $('<div>');
                         var rating = results[i].rating;
                         var ratingDisplay = $('<p>').text('Rating: ' + rating);
-                    
                         var animalDisplay = $('<img>');
-                        animalDisplay.attr('src', results[i].images.original.url);
+
+                        
+                        
+                        // displays a still image upon displaying with added attributes and class
+                        animalDisplay.attr('src', results[i].images.original_still.url)
+                                    .addClass('NewGif')
+                                    .attr('img-state', 'still')
+                                    .attr('img-still', results[i].images.original_still.url )
+                                    .attr('img-animate', results[i].images.original.url );
+
+
+                        // adding rating and image to the gif div
                         gifDisplay.append(ratingDisplay);
                         gifDisplay.append(animalDisplay);
+
+                        // prepending gif div to the html
                         $('#GifsHere').prepend(gifDisplay);
+
                     }
-                })
+
+                });
+
+                    $('#GifsHere').on('click', '.NewGif', function() {
+                        var state = $(this).attr('img-state');   
+                        if (state === 'still') {
+                               $(this).attr('src', $(this).attr('img-animate'));
+                               $(this).attr('img-state', 'animate');
+                           } else {
+                                $(this).attr('src', $(this).attr('img-still'));
+                                $(this).attr('img-state', 'still');
+                           }
+                           
+
+                    });
         });
+
+  
     </script>
     
 </body>
